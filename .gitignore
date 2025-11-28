@@ -1,0 +1,68 @@
+# ==============================
+# Unity 기본 무시 폴더
+# ==============================
+Temp/
+Library/
+Obj/
+Build/
+Builds/
+Logs/
+UserSettings/
+
+# ==============================
+# OS 관련 파일
+# ==============================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ==============================
+# Visual Studio / Rider / JetBrains
+# ==============================
+.vscode/
+*.csproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.opendb
+*.VC.db
+
+# ==============================
+# Unity Addressables & Cache
+# ==============================
+/Assets/AddressableAssetsData/*/*.bin
+/Assets/AddressableAssetsData/*/*.settings
+/Library/com.unity.addressables/*
+
+# ==============================
+# Logs & Crash
+# ==============================
+*.log
+*.stacktrace
+
+# ==============================
+# Build / Deployment
+# ==============================
+*.apk
+*.aab
+*.xcodeproj
+*.xcworkspace
+*.app
+*.exe
+*.unitypackage
+# Unity
+[Ll]ibrary/
+[Tt]emp/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+UserSettings/
+.vscode/
+*.csproj
+*.sln
