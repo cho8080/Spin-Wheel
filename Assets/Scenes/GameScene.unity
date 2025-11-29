@@ -556,6 +556,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &717759750
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 717759752}
+  - component: {fileID: 717759751}
+  m_Layer: 0
+  m_Name: AddressableManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &717759751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 717759750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 000ef3054c4268842a6c53b51a3a8193, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _endGamePopUp:
+    m_AssetGUID: fd1d68c1eedd46042a4c7ed7705c81ca
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+--- !u!4 &717759752
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 717759750}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &725844818
 GameObject:
   m_ObjectHideFlags: 0
@@ -864,6 +913,7 @@ RectTransform:
   m_Children:
   - {fileID: 113752215}
   - {fileID: 7839414083868994578}
+  - {fileID: 1803641431390871228}
   - {fileID: 6278181112341723335}
   - {fileID: 5804100494547189585}
   m_Father: {fileID: 978668115}
@@ -882,8 +932,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1410444254}
-  - component: {fileID: 1441361074}
-  - component: {fileID: 1440052966}
+  - component: {fileID: 1430622591}
   m_Layer: 5
   m_Name: Spin Wheel
   m_TagString: Untagged
@@ -891,28 +940,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!95 &1440052966
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1430622590}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f43cfc0272a3b41cbab0283f404ae52b, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1441361074
+--- !u!114 &1430622591
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -921,10 +949,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1430622590}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d2a7ab2f10d6468fbe16cf5e22c72f8, type: 3}
+  m_Script: {fileID: 11500000, guid: e153cae84a8e6d84f8d7b0aa0d427f68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundColor: {r: 0, g: 0, b: 0, a: 0.8}
+  _wheel: {fileID: 7839414083868994578}
+  _spinBtn: {fileID: 4423623027753498949}
+  _itemList:
+  - {fileID: 11400000, guid: 60189787076e3b84eb139b0ad3770c67, type: 2}
+  - {fileID: 11400000, guid: 2e04c3c32e4eb74489fe804365ca9d9f, type: 2}
+  - {fileID: 11400000, guid: 347f42850e03f094f99e21e712a11682, type: 2}
+  - {fileID: 11400000, guid: 56954d5aeae885643ba366c4bc34d220, type: 2}
+  - {fileID: 11400000, guid: c0310a516deafdb41a8fdf6340ee0ad4, type: 2}
+  - {fileID: 11400000, guid: 2a7d5410da2b41f4587f294829f6693d, type: 2}
+  - {fileID: 11400000, guid: 9e4b520623d06f749afc4a55f428b608, type: 2}
+  - {fileID: 11400000, guid: d74dc2596ae5a264dbde15b1fe92f392, type: 2}
 --- !u!1 &1498282220
 GameObject:
   m_ObjectHideFlags: 0
@@ -1008,6 +1046,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 978668115}
     m_Modifications:
+    - target: {fileID: 2942954171810899042, guid: ed74bf280a4994f858a71852c4429959, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942954171810899042, guid: ed74bf280a4994f858a71852c4429959, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942954171810899042, guid: ed74bf280a4994f858a71852c4429959, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2942954171890366800, guid: ed74bf280a4994f858a71852c4429959, type: 3}
       propertyPath: m_Name
       value: Avatar
@@ -1091,6 +1141,30 @@ PrefabInstance:
     - target: {fileID: 2942954171890366801, guid: ed74bf280a4994f858a71852c4429959, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942954172386064361, guid: ed74bf280a4994f858a71852c4429959, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942954172386064361, guid: ed74bf280a4994f858a71852c4429959, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942954172386064361, guid: ed74bf280a4994f858a71852c4429959, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 36.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942954172386064361, guid: ed74bf280a4994f858a71852c4429959, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -52.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942954173282942326, guid: ed74bf280a4994f858a71852c4429959, type: 3}
+      propertyPath: m_fontSize
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942954173282942326, guid: ed74bf280a4994f858a71852c4429959, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2942954173619235489, guid: ed74bf280a4994f858a71852c4429959, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1918,18 +1992,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3928149770577469798}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.175, y: 1.175, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3943339675636032401}
   - {fileID: 4660726588831900239}
-  m_Father: {fileID: 7839414083868994578}
+  m_Father: {fileID: 1410444254}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -45}
+  m_AnchoredPosition: {x: 2.0125122, y: 109.375}
   m_SizeDelta: {x: 80, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1835507661216532159
@@ -2069,7 +2143,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7452831926002878364}
-  - component: {fileID: 7881126220896777441}
   m_Layer: 5
   m_Name: Items
   m_TagString: Untagged
@@ -2911,30 +2984,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 3189590947849460902}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: Spin
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 7881126220896777441}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: Spin
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!222 &4437542783981805440
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3705,7 +3754,7 @@ GameObject:
   - component: {fileID: 3608488820176486016}
   - component: {fileID: 6278181112341723334}
   m_Layer: 5
-  m_Name: Button - Blue (Teal)
+  m_Name: SpinButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4386,7 +4435,6 @@ RectTransform:
   - {fileID: 7452831926002878364}
   - {fileID: 7006618959875257177}
   - {fileID: 2066734749830625547}
-  - {fileID: 1803641431390871228}
   m_Father: {fileID: 1410444254}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -4394,42 +4442,6 @@ RectTransform:
   m_AnchoredPosition: {x: 2.0125, y: 253.875}
   m_SizeDelta: {x: 610, y: 610}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7881126220896777441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2265107010823317866}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95981c423f82f465c816e5676cc80807, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AnimationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &7916565415003290393
 GameObject:
   m_ObjectHideFlags: 0
@@ -4776,3 +4788,4 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 725844822}
   - {fileID: 1068817909}
+  - {fileID: 717759752}

@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57bee314d90c3b34ba9776b195cb0d71, type: 3}
-  m_Name: Table
+  m_Script: {fileID: 11500000, guid: bb02befc1e5899d4590f1355079a6774, type: 3}
+  m_Name: Item04
   m_EditorClassIdentifier: 
-  Item: {fileID: 11400000, guid: f5fce66854f92b445afce491ba92e015, type: 2}
-  Probability: 0
-  IsPickup: 0
+  ItemID: 3
+  ItemName: Item04
+  Icon: {fileID: 21300000, guid: 3e57b44876d5643fa877b9543d4af3a9, type: 3}
