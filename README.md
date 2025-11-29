@@ -3,7 +3,7 @@ Unity Item Gacha System (UI Portfolio)
 Unity 기반 모바일 게임을 대상으로 제작한 확률형 아이템 시스템(UI 중심) 포트폴리오 프로젝트입니다.
 실제 라이브 서비스 환경을 고려하여 데이터 기반 구조, 확률 알고리즘, 연출 시스템, UI 아키텍처를 중심으로 구현했습니다.
 
-## ⚙ 기술 스택 (Tech Stack)
+## 기술 스택 (Tech Stack)
 
 ###  Unity UI 구성
 - Unity UGUI
