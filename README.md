@@ -19,18 +19,23 @@ Unity 기반 모바일 게임을 대상으로 제작한 확률형 아이템 시�
 - DOTween 룰렛 연출  
   - Spin Wheel 회전, 감속 등 UI 연출 처리  
   - Ease Curve 기반 자연스러운 연출 구현
+    
+- Shader Graph 연출
+  - 버튼 UI에 Rainbow Shader Graph 적용
+  - 강조 효과로 시각적 피드백 제공
+
+- Timeline UI 연출
+  - 게임 시작 시 Fade-in 효과 구현
+  - CanvasGroup Alpha 기반 자연스러운 UI 등장
+  
 - Addressables 연출 로딩  
-  - 이펙트와 PopUp 비동기 로딩  
+  - PopUp 비동기 로딩  
   - 메모리 최적화 및 리소스 관리 구조 적용
 
 ###  UI 구조
 - 상태 머신(State Machine) + 이벤트 구조  
   - `Idle → Spinning` 흐름 제어  
   - 중복 클릭 방지 및 UI 상태 충돌 방지
-
-- 이벤트(Observer) 기반 자동 갱신  
-  - UI 자동 반영
-
 
 ---
 
@@ -52,7 +57,6 @@ Unity 기반 모바일 게임을 대상으로 제작한 확률형 아이템 시�
 
 - 아이템 확률형 아이템 시스템
 - 등급별(R / SR / SSR) 연출 분기
-
 
 
 ---
