@@ -15,7 +15,8 @@ public class SpinWheel : MonoBehaviour
      [Header("UI")]
     [SerializeField] private Transform  _wheel;
     [SerializeField] private Button _spinBtn;
-    
+     [SerializeField] private ParticleSystem particle; 
+
      [Header("Item")]
 
     [SerializeField] private List<ItemTableSO> _itemList;
@@ -57,8 +58,18 @@ public class SpinWheel : MonoBehaviour
                 if(_itemDataSO == null)
                     return;
                 
+                
+                if(particle != null)
+                {
+                   // particle.transform.position = _wheel.position;
+                    particle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                    particle.Clear();
+                    particle.Play();
+                }
+
                 AddressableManager.Instance.ShowEndGamePopUp(_itemDataSO);
 
+               
               });    
         }
     }
