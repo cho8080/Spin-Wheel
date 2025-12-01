@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 
 // SpineWheel 상태를 정의
@@ -20,7 +21,11 @@ public class SpinWheel : MonoBehaviour
      [Header("Item")]
 
     [SerializeField] private List<ItemTableSO> _itemList;
-    [SerializeField] private int _itemCount = 8; // 룰렛의 총 아이템 개수 (Inspector에서 설정)
+    [SerializeField] private int _itemCount = 8; // 룰렛의 총 아이템 개수 
+
+    [Header("ItemGrade")]
+    [SerializeField] private int _pityCount = 0;   // 현재 천장 누적
+    [SerializeField] private int _pityMax = 50;    // 몇 번 실패하면 SSR 확정
 
     private SpineWheelState _currentState;
     private bool _canBtnClick;
@@ -115,18 +120,41 @@ public class SpinWheel : MonoBehaviour
 /// </summary>
 public ItemDataSO DrawItem(List<ItemTableSO> table)
 {
+    // 시행 횟수 증가
+    _pityCount++;
+
+    // 천장 시스템
+    if(_pityCount >= _pityMax)
+        {
+            // SSR 아이템 랜덤 지급
+            ItemDataSO ssrItem = GetRandomGradeItem(table, GachaGrade.SSR);
+            _pityCount = 0;
+            return ssrItem;
+        }
+
+    // 일반 확률 뽑기
+    // 모든 아이템 확률의 총합을 저장할 변수
     int total = 0;
+
+    // 각 아이템의 확률을 total에 누적
     foreach (var t in table)
         total += t.Probability;
 
+    // 0 ~ 전체 확률 범위 내에서 랜덤 값 생성
     int rand = Random.Range(0, total);
 
+     // 누적 확률을 저장할 변수
     int acc = 0;
+
+    // 테이블을 처음부터 순회하면서
     foreach (var t in table)
     {
+        // 현재 아이템까지의 누적 확률 계산
         acc += t.Probability;
+
+        // 랜덤 값이 현재 누적 확률보다 작다면
         if (rand < acc)
-            return t.Item;
+            return t.Item; // 해당 구간에 속하는 아이템을 반환
     }
 
     return null;
@@ -146,4 +174,23 @@ private int GetItemIndex(ItemDataSO item)
     // 못 찾으면 0번 인덱스 반환
     return 0;
 }
+    private ItemDataSO  GetRandomGradeItem(List<ItemTableSO> table, GachaGrade gachaGrade)
+    {
+        List<ItemTableSO> ssrItems = new List<ItemTableSO>();
+        foreach (var item in table)
+        {
+            if(item.Grade == gachaGrade)
+            {
+                ssrItems.Add(item);
+            }
+        }
+
+         if (ssrItems.Count == 0)
+        {
+            return null;
+        }
+        int rand = Random.Range(0, ssrItems.Count);
+
+        return ssrItems[rand].Item;
+    }
 }
