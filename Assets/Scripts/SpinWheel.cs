@@ -80,6 +80,16 @@ public class SpinWheel : MonoBehaviour
               .SetEase(Ease.OutQuart)
               .OnComplete(()=>
               {
+                ItemTableSO itemTable = GetItemTableSO(_itemDataSO);
+
+                if(_itemDataSO != null && itemTable != null && itemTable.Grade == GachaGrade.SSR)
+                  {
+                      CameraShake cameraShake = FindObjectOfType<CameraShake>();
+                      if(cameraShake != null)
+                      {
+                          cameraShake.TriggerShake(0.1f, 0.1f);
+                      }
+                  }
                 // 회전 완료 후에는 상태를 Idle로 전환한다.
                 ChangeState(SpineWheelState.Idle);
 
@@ -192,5 +202,20 @@ private int GetItemIndex(ItemDataSO item)
         int rand = Random.Range(0, ssrItems.Count);
 
         return ssrItems[rand].Item;
+    }
+
+    /// <summary>
+    /// _itemList에서 특정 ItemDataSO와 일치하는 ItemTableSO를 반환
+    /// </summary>
+    private ItemTableSO GetItemTableSO(ItemDataSO itemDataSO)
+    {
+        for (int i = 0; i < _itemList.Count; i++)
+        {
+            if (_itemList[i].Item == itemDataSO)
+                return _itemList[i];
+        }
+
+        // 못 찾으면 null 반환
+        return null;
     }
 }
