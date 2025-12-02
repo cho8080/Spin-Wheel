@@ -1,4 +1,4 @@
-Unity Item Gacha System (UI Portfolio)
+Unity Item Gacha System (2025.12.29~2025.12.02)
 
 ![UI 연출(조하늘)](https://github.com/user-attachments/assets/42d8251a-e65c-4919-b0f8-252c592ace85)
 
