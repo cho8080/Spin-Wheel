@@ -75,5 +75,12 @@ public class AddressableManager : MonoBehaviour
         var index = gameObjects.Count -1;
         Addressables.ReleaseInstance(gameObjects[index]);
         gameObjects.RemoveAt(index);
+
+        // 룰렛을 초기 위치로 리셋
+        SpinWheel spinWheel = FindObjectOfType<SpinWheel>();
+        if(spinWheel != null)
+        {
+            spinWheel.ResetWheel();
+        }
     }
 }

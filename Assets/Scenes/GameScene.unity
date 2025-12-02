@@ -1182,38 +1182,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &771317493
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 771317495}
-  m_Layer: 0
-  m_Name: CameraShake
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &771317495
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 771317493}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1783231450}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &847380664
 GameObject:
   m_ObjectHideFlags: 0
@@ -1798,6 +1766,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2a7d5410da2b41f4587f294829f6693d, type: 2}
   - {fileID: 11400000, guid: 9e4b520623d06f749afc4a55f428b608, type: 2}
   - {fileID: 11400000, guid: d74dc2596ae5a264dbde15b1fe92f392, type: 2}
+  _slots:
+  - {fileID: 2646096596022215942}
+  - {fileID: 7586102551376829671}
+  - {fileID: 3454625395431630127}
+  - {fileID: 1307410570104605160}
+  - {fileID: 2023778178673715629}
+  - {fileID: 1661176695903785024}
+  - {fileID: 1215567747003712109}
+  - {fileID: 3902721308010731827}
   _itemCount: 8
   _pityCount: 0
   _pityMax: 50
@@ -2440,7 +2417,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2030471066}
-  m_Father: {fileID: 771317495}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1790190232
 GameObject:
@@ -2784,7 +2761,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 1
   simulationSpeed: 1
-  stopAction: 1
+  stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -10641,13 +10618,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2646096596022215942}
-  - {fileID: 2023778178673715629}
-  - {fileID: 3902721308010731827}
-  - {fileID: 1307410570104605160}
-  - {fileID: 1215567747003712109}
-  - {fileID: 3454625395431630127}
-  - {fileID: 1661176695903785024}
   - {fileID: 7586102551376829671}
+  - {fileID: 3454625395431630127}
+  - {fileID: 1307410570104605160}
+  - {fileID: 2023778178673715629}
+  - {fileID: 1661176695903785024}
+  - {fileID: 1215567747003712109}
+  - {fileID: 3902721308010731827}
   m_Father: {fileID: 7839414083868994578}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -11187,4 +11164,4 @@ SceneRoots:
   - {fileID: 1068817909}
   - {fileID: 717759752}
   - {fileID: 1051496565}
-  - {fileID: 771317495}
+  - {fileID: 1783231450}

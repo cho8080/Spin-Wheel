@@ -21,22 +21,33 @@ public class SpinWheel : MonoBehaviour
      [Header("Item")]
 
     [SerializeField] private List<ItemTableSO> _itemList;
+    [SerializeField] private List<Transform> _slots;
     [SerializeField] private int _itemCount = 8; // 룰렛의 총 아이템 개수 
 
     [Header("ItemGrade")]
     [SerializeField] private int _pityCount = 0;   // 현재 천장 누적
     [SerializeField] private int _pityMax = 50;    // 몇 번 실패하면 SSR 확정
+    [SerializeField] private int _spinCount = 0;   // 총 스핀 횟수
 
     private SpineWheelState _currentState;
     private bool _canBtnClick;
 
     private ItemDataSO _itemDataSO;
+    private int _drawnItemIndex; // 뽑은 아이템의 인덱스
 
     void Start()
     {
         _spinBtn.onClick.AddListener(SpineBtnClick);
 
         ChangeState(SpineWheelState.Idle);
+    }
+
+    /// <summary>
+    /// 룰렛을 초기 위치로 리셋
+    /// </summary>
+    public void ResetWheel()
+    {
+        _wheel.localRotation = Quaternion.Euler(0, 0, 0);
     }
 
     /// <summary>
@@ -50,9 +61,17 @@ public class SpinWheel : MonoBehaviour
             // 상태를 Spinning으로 전환하고
             ChangeState(SpineWheelState.Spinning);
 
-            // 먼저 아이템을 뽑는다
-            ItemDataSO itemDataSO = DrawItem(_itemList);
-            _itemDataSO = itemDataSO;
+            // 먼저 아이템을 뽑는다 (인덱스도 함께 저장)
+            int drawnIndex = DrawItemWithIndex(_itemList);
+
+            if(drawnIndex < 0 || drawnIndex >= _itemList.Count)
+            {
+                ChangeState(SpineWheelState.Idle);
+                return;
+            }
+
+            _itemDataSO = _itemList[drawnIndex].Item;
+            _drawnItemIndex = drawnIndex;
 
             if(_itemDataSO == null)
             {
@@ -60,22 +79,20 @@ public class SpinWheel : MonoBehaviour
                 return;
             }
 
-            // 뽑은 아이템의 인덱스를 찾는다
-            int targetIndex = GetItemIndex(_itemDataSO);
+            // 뽑은 아이템의 인덱스 사용
+            int targetIndex = _drawnItemIndex;
 
-            // 목표 각도 계산 (각 아이템당 360 / itemCount도씩 차지)
-            float anglePerItem = 360f / _itemCount;
+            float anglePerItem = 360f / _itemList.Count;
 
-            // 핸들이 위쪽에 고정되어 있으므로, 해당 아이템이 위로 오도록 회전
-            // 반시계방향 회전이므로 음수, targetIndex만큼 회전하면 해당 아이템이 위로 옴
-            float targetAngle = targetIndex * anglePerItem;
+            // 핸들이 0도일 때 첫 번째 슬롯(0번 인덱스)이 핸들 위쪽에 오도록 오프셋
+            float wheelOffset = 0; // 실제 핸들 기준에 맞게 조정
 
-            // 여러 바퀴 돌고 목표 각도에 도달하도록 계산
-            int fullRotations = 12; // 12바퀴 회전
-            float offset = 90f; // 초기 위치 오프셋 조정
-            float finalAngle = -(360f * fullRotations + targetAngle + offset);
+            // 시계방향 회전
+            float targetAngle = (_drawnItemIndex * anglePerItem) + wheelOffset;
 
-            // 일정 시간동안 회전 시킨다
+            int fullRotations = 12;
+
+            float finalAngle = fullRotations * 360f + targetAngle; // 반시계방향
              _wheel.DOLocalRotate(new Vector3(0, 0, finalAngle), 4f, RotateMode.FastBeyond360)
               .SetEase(Ease.OutQuart)
               .OnComplete(()=>
@@ -93,10 +110,11 @@ public class SpinWheel : MonoBehaviour
                 // 회전 완료 후에는 상태를 Idle로 전환한다.
                 ChangeState(SpineWheelState.Idle);
 
-                if(particle != null)
+                if(particle != null && itemTable != null &&
+                   (itemTable.Grade == GachaGrade.SSR || itemTable.Grade == GachaGrade.SR))
                 {
-                   // particle.transform.position = _wheel.position;
-                    particle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+
+                    particle.Stop(true, ParticleSystemStopBehavior.StopEmitting);
                     particle.Clear();
                     particle.Play();
                 }
@@ -126,21 +144,44 @@ public class SpinWheel : MonoBehaviour
     }
 
 /// <summary>
-/// 아이템 추첨
+/// 아이템 추첨 (인덱스 반환)
 /// </summary>
-public ItemDataSO DrawItem(List<ItemTableSO> table)
+public int DrawItemWithIndex(List<ItemTableSO> table)
 {
+    // 스핀 횟수 증가
+    _spinCount++;
+
+    // 튜토리얼: 처음 3번은 R, SR, SSR 순서로 고정
+    // if(_spinCount == 1)
+    // {
+    //     // 첫 번째: R등급
+    //     int rIndex = GetRandomGradeItemIndex(table, GachaGrade.R);
+    //     return rIndex;
+    // }
+    // else if(_spinCount == 2)
+    // {
+    //     // 두 번째: SR등급
+    //     int srIndex = GetRandomGradeItemIndex(table, GachaGrade.SR);
+    //     return srIndex;
+    // }
+    // else if(_spinCount == 3)
+    // {
+    //     // 세 번째: SSR등급
+    //     int ssrIndex = GetRandomGradeItemIndex(table, GachaGrade.SSR);
+    //     return ssrIndex;
+    // }
+
     // 시행 횟수 증가
     _pityCount++;
 
     // 천장 시스템
     if(_pityCount >= _pityMax)
-        {
-            // SSR 아이템 랜덤 지급
-            ItemDataSO ssrItem = GetRandomGradeItem(table, GachaGrade.SSR);
-            _pityCount = 0;
-            return ssrItem;
-        }
+    {
+        // SSR 아이템 랜덤 지급
+        int ssrIndex = GetRandomGradeItemIndex(table, GachaGrade.SSR);
+        _pityCount = 0;
+        return ssrIndex;
+    }
 
     // 일반 확률 뽑기
     // 모든 아이템 확률의 총합을 저장할 변수
@@ -153,21 +194,21 @@ public ItemDataSO DrawItem(List<ItemTableSO> table)
     // 0 ~ 전체 확률 범위 내에서 랜덤 값 생성
     int rand = Random.Range(0, total);
 
-     // 누적 확률을 저장할 변수
+    // 누적 확률을 저장할 변수
     int acc = 0;
 
     // 테이블을 처음부터 순회하면서
-    foreach (var t in table)
+    for (int i = 0; i < table.Count; i++)
     {
         // 현재 아이템까지의 누적 확률 계산
-        acc += t.Probability;
+        acc += table[i].Probability;
 
         // 랜덤 값이 현재 누적 확률보다 작다면
         if (rand < acc)
-            return t.Item; // 해당 구간에 속하는 아이템을 반환
+            return i; // 해당 인덱스 반환
     }
 
-    return null;
+    return 0;
 }
 
 /// <summary>
@@ -175,6 +216,7 @@ public ItemDataSO DrawItem(List<ItemTableSO> table)
 /// </summary>
 private int GetItemIndex(ItemDataSO item)
 {
+    // ItemTableSO까지 정확히 매칭하는 인덱스를 찾음
     for (int i = 0; i < _itemList.Count; i++)
     {
         if (_itemList[i].Item == item)
@@ -202,6 +244,33 @@ private int GetItemIndex(ItemDataSO item)
         int rand = Random.Range(0, ssrItems.Count);
 
         return ssrItems[rand].Item;
+    }
+
+    /// <summary>
+    /// 특정 등급의 아이템을 랜덤으로 선택하고 인덱스 반환
+    /// </summary>
+    private int GetRandomGradeItemIndex(List<ItemTableSO> table, GachaGrade gachaGrade)
+    {
+        List<int> gradeIndices = new List<int>();
+
+        // 해당 등급의 모든 인덱스를 찾음
+        for (int i = 0; i < table.Count; i++)
+        {
+            if(table[i].Grade == gachaGrade)
+            {
+                gradeIndices.Add(i);
+            }
+        }
+
+        // 매칭되는 인덱스가 없으면 0 반환
+        if (gradeIndices.Count == 0)
+        {
+            return 0;
+        }
+
+        // 랜덤하게 하나 선택
+        int rand = Random.Range(0, gradeIndices.Count);
+        return gradeIndices[rand];
     }
 
     /// <summary>
