@@ -2,7 +2,10 @@ Unity Item Gacha System (UI Portfolio)
 
 ![UI 연출(조하늘)](https://github.com/user-attachments/assets/42d8251a-e65c-4919-b0f8-252c592ace85)
 
+[ 동영상 보기 ]
 https://www.youtube.com/watch?v=ta-nE_Mr8h4
+
+[ 작업 일지 ]
 https://cho8080.tistory.com/108
 
 Unity 기반 모바일 게임을 대상으로 제작한 확률형 아이템 시스템(UI 중심) 포트폴리오 프로젝트입니다.
