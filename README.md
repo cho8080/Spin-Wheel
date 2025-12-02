@@ -8,7 +8,6 @@ Unity 기반 모바일 게임을 대상으로 제작한 확률형 아이템 시�
 ###  Unity UI 구성
 - Unity UGUI
 - 모바일 세로형(1080x1920) 기준 UI 구성
-- Canvas Scaler + Safe Area 대응
 
 ###  데이터 구조
 - ScriptableObject 확률 테이블
